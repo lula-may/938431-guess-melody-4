@@ -8,6 +8,7 @@ it(`WelcomeScreen should render 10`, () => {
   const tree = renderer.create(
       <WelcomeScreeen
         errorsAmount={errorsAmount}
+        onWelcomeButtonClick={() => {}}
       />
   )
   .toJSON();
