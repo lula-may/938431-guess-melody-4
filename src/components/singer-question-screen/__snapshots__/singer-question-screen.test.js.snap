@@ -76,7 +76,9 @@ exports[`Should render SingerQuestionScreen 1`] = `
         <div
           className="track__status"
         >
-          <audio />
+          <audio
+            src="https://upload.wikimedia.org/wikipedia/en/c/cb/Lady_Gaga.ogg"
+          />
         </div>
       </div>
     </div>
@@ -88,21 +90,45 @@ exports[`Should render SingerQuestionScreen 1`] = `
       >
         <input
           className="artist__input visually-hidden"
-          id="answer-1"
+          id="artist-0"
           name="answer"
+          onChange={[Function]}
+          type="radio"
+          value="artist-0"
+        />
+        <label
+          className="artist__name"
+          htmlFor="artist-0"
+        >
+          <img
+            alt="Lady Gaga"
+            className="artist__picture"
+            src="https://upload.wikimedia.org/images/Lady_Gaga.jpg"
+          />
+          Lady Gaga
+        </label>
+      </div>
+      <div
+        className="artist"
+      >
+        <input
+          className="artist__input visually-hidden"
+          id="artist-1"
+          name="answer"
+          onChange={[Function]}
           type="radio"
           value="artist-1"
         />
         <label
           className="artist__name"
-          htmlFor="answer-1"
+          htmlFor="artist-1"
         >
           <img
-            alt="Пелагея"
+            alt="Witney Houston"
             className="artist__picture"
-            src="http://placehold.it/134x134"
+            src="https://upload.wikimedia.org/images/Witnew_Houston.jpg"
           />
-          Пелагея
+          Witney Houston
         </label>
       </div>
       <div
@@ -110,43 +136,22 @@ exports[`Should render SingerQuestionScreen 1`] = `
       >
         <input
           className="artist__input visually-hidden"
-          id="answer-2"
+          id="artist-2"
           name="answer"
+          onChange={[Function]}
           type="radio"
           value="artist-2"
         />
         <label
           className="artist__name"
-          htmlFor="answer-2"
+          htmlFor="artist-2"
         >
           <img
-            alt="Пелагея"
+            alt="Cher"
             className="artist__picture"
-            src="http://placehold.it/134x134"
+            src="https://upload.wikimedia.org/images/Cher.jpg"
           />
-          Краснознаменная дивизия имени моей бабушки
-        </label>
-      </div>
-      <div
-        className="artist"
-      >
-        <input
-          className="artist__input visually-hidden"
-          id="answer-3"
-          name="answer"
-          type="radio"
-          value="artist-3"
-        />
-        <label
-          className="artist__name"
-          htmlFor="answer-3"
-        >
-          <img
-            alt="Пелагея"
-            className="artist__picture"
-            src="http://placehold.it/134x134"
-          />
-          Lorde
+          Cher
         </label>
       </div>
     </form>

@@ -14,15 +14,18 @@ export default [
     answers: [
       {
         singer: `Chris Rea`,
-        avatar: `${AVATAR_URL}/${getRandomInteger(MIN_NUMBER, MAX_NUMBER)}`
+        avatar: `${AVATAR_URL}/${getRandomInteger(MIN_NUMBER, MAX_NUMBER)}`,
+        id: `singer0`
       },
       {
         singer: `Dire Straits`,
-        avatar: `${AVATAR_URL}/${getRandomInteger()}`
+        avatar: `${AVATAR_URL}/${getRandomInteger(MIN_NUMBER, MAX_NUMBER)}`,
+        id: `singer1`
       },
       {
         singer: `Joe Cocker`,
-        avatar: `${AVATAR_URL}/${getRandomInteger()}`
+        avatar: `${AVATAR_URL}/${getRandomInteger(MIN_NUMBER, MAX_NUMBER)}`,
+        id: `singer2`
       }
     ]
   },
@@ -32,19 +35,23 @@ export default [
     answers: [
       {
         src: `https://upload.wikimedia.org/wikipedia/en/a/ae/Adele_Skyfall_sample.ogg`,
-        genre: `pop`
+        genre: `pop`,
+        id: `treck0`
       },
       {
         src: `https://upload.wikimedia.org/wikipedia/en/3/3f/Layla_%28Acoustic%29_Sample.ogg`,
-        genre: `rock`
+        genre: `rock`,
+        id: `treck1`,
       },
       {
         src: `https://upload.wikimedia.org/wikipedia/en/e/e1/50_Cent_-_Hustler%27s_Ambition.ogg`,
-        genre: `hip hop`
+        genre: `hip hop`,
+        id: `treck2`,
       },
       {
         src: `https://upload.wikimedia.org/wikipedia/en/7/75/Queen_I_want_to_break_free.ogg`,
-        genre: `rock`
+        genre: `rock`,
+        id: `treck3`
       }
     ]
   }

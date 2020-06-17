@@ -21,10 +21,12 @@ const App = (props) => {
         </Route>
         <Route exact path="/dev-singer">
           <SingerQuestionScreen
+            onAnswer={() => {}}
             question={questions[0]}/>
         </Route>
         <Route exact path="/dev-genre">
           <GenreQuestionScreen
+            onAnswer={() => {}}
             question={questions[1]}/>
         </Route>
       </Switch>
