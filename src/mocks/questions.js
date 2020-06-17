@@ -4,7 +4,7 @@ const MIN_NUMBER = 1;
 
 const getRandomInteger = (min, max) => Math.round(Math.random() * (max - min) + min);
 
-const questions = [
+export default [
   {
     type: `singer`,
     song: {
@@ -49,5 +49,3 @@ const questions = [
     ]
   }
 ];
-
-export {questions};
