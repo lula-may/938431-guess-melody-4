@@ -8,7 +8,7 @@ Enzyme.configure({
 });
 
 describe(`WelcomeScreenComponent`, () => {
-  it(`WelcomeScreenButton should be pressed`, () => {
+  it(`Should run callback when clicking WelcomeScreenButton`, () => {
     const onWelcomeButtonClick = jest.fn();
     const welcomeScreen = shallow(
         <WelcomeScreen
