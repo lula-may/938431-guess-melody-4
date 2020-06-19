@@ -15,4 +15,15 @@ const artistQuestionShape = {
       })).isRequired
 };
 
-export {artistQuestionShape};
+const genreQuestionShape = {
+  type: PropTypes.oneOf([GameType.GENRE, GameType.SINGER]),
+  genre: PropTypes.string.isRequired,
+  answers: PropTypes.arrayOf(
+      PropTypes.shape({
+        src: PropTypes.string.isRequired,
+        genre: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired
+      }).isRequired
+  ).isRequired,
+};
+export {artistQuestionShape, genreQuestionShape};
