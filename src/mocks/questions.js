@@ -6,26 +6,26 @@ const getRandomInteger = (min, max) => Math.round(Math.random() * (max - min) + 
 
 export default [
   {
-    type: `singer`,
+    type: `artist`,
     song: {
-      singer: `Dire Straits`,
+      artist: `Dire Straits`,
       src: `https://upload.wikimedia.org/wikipedia/en/c/cb/Dire_Straits_-_Money_for_Nothing.ogg`
     },
     answers: [
       {
-        singer: `Chris Rea`,
+        artist: `Chris Rea`,
         avatar: `${AVATAR_URL}/${getRandomInteger(MIN_NUMBER, MAX_NUMBER)}`,
-        id: `singer0`
+        id: `artist0`
       },
       {
-        singer: `Dire Straits`,
+        artist: `Dire Straits`,
         avatar: `${AVATAR_URL}/${getRandomInteger(MIN_NUMBER, MAX_NUMBER)}`,
-        id: `singer1`
+        id: `artist1`
       },
       {
-        singer: `Joe Cocker`,
+        artist: `Joe Cocker`,
         avatar: `${AVATAR_URL}/${getRandomInteger(MIN_NUMBER, MAX_NUMBER)}`,
-        id: `singer2`
+        id: `artist2`
       }
     ]
   },

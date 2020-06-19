@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SingerQuestionScreen from "./singer-question-screen.jsx";
+import ArtistQuestionScreen from "./artist-question-screen.jsx";
 import {questions} from "../../test-mocks/test-questions";
 
 const question = questions[0];
 
-it(`Should render SingerQuestionScreen`, () => {
+it(`Should render ArtistQuestionScreen`, () => {
   const tree = renderer.create(
-      <SingerQuestionScreen
+      <ArtistQuestionScreen
         onAnswer={() => {}}
         question={question}
       />

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {GameType} from "../../const";
 
-const SingerQuestionScreen = (props) => {
+const ArtistQuestionScreen = (props) => {
   const {onAnswer, question} = props;
   const {
     song,
@@ -52,8 +52,8 @@ const SingerQuestionScreen = (props) => {
                   }}
                 />
                 <label className="artist__name" htmlFor={`artist-${i}`}>
-                  <img className="artist__picture" src={answer.avatar} alt={answer.singer}/>
-                  {answer.singer}
+                  <img className="artist__picture" src={answer.avatar} alt={answer.artist}/>
+                  {answer.artist}
                 </label>
               </div>
 
@@ -66,21 +66,21 @@ const SingerQuestionScreen = (props) => {
   );
 };
 
-SingerQuestionScreen.propTypes = {
+ArtistQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   question: PropTypes.shape({
-    type: PropTypes.oneOf([GameType.SINGER, GameType.GENRE]).isRequired,
+    type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
     song: PropTypes.shape({
-      singer: PropTypes.string.isRequired,
+      artist: PropTypes.string.isRequired,
       src: PropTypes.string.isRequired
     }).isRequired,
     answers: PropTypes.arrayOf(
         PropTypes.shape({
-          singer: PropTypes.string.isRequired,
+          artist: PropTypes.string.isRequired,
           avatar: PropTypes.string.isRequired,
           id: PropTypes.string.isRequired
         })).isRequired
   }).isRequired
 };
 
-export default SingerQuestionScreen;
+export default ArtistQuestionScreen;

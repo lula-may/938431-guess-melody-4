@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PropTypes from "prop-types";
 import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
-import SingerQuestionScreen from "../singer-question-screen/singer-question-screen.jsx";
+import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen.jsx";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
 import {GameType} from "../../const";
 
@@ -24,7 +24,7 @@ class App extends PureComponent {
             {this._renderGameScreen()}
           </Route>
           <Route exact path="/dev-singer">
-            <SingerQuestionScreen
+            <ArtistQuestionScreen
               onAnswer={() => {}}
               question={questions[0]}/>
           </Route>
@@ -55,9 +55,9 @@ class App extends PureComponent {
 
     if (question) {
       switch (question.type) {
-        case GameType.SINGER:
+        case GameType.ARTIST:
           return (
-            <SingerQuestionScreen
+            <ArtistQuestionScreen
               onAnswer={() => {
                 this.setState((prevState) => ({
                   step: prevState.step + 1

@@ -1,23 +1,23 @@
 const questions = [
   {
-    type: `singer`,
+    type: `artist`,
     song: {
-      singer: `Lady Gaga`,
+      artist: `Lady Gaga`,
       src: `https://music/Lady_Gaga.ogg`
     },
     answers: [
       {
-        singer: `Lady Gaga`,
+        artist: `Lady Gaga`,
         avatar: `https://images/Lady_Gaga.jpg`,
         id: `0`
       },
       {
-        singer: `Witney Houston`,
+        artist: `Witney Houston`,
         avatar: `https://images/Witnew_Houston.jpg`,
         id: `1`
       },
       {
-        singer: `Cher`,
+        artist: `Cher`,
         avatar: `https://images/Cher.jpg`,
         id: `2`
       }

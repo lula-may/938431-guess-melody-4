@@ -1,5 +1,5 @@
 const GameType = {
-  SINGER: `singer`,
+  ARTIST: `artist`,
   GENRE: `genre`
 };
 

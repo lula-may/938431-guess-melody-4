@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should render SingerQuestionScreen 1`] = `
+exports[`Should render ArtistQuestionScreen 1`] = `
 <section
   className="game game--artist"
 >
