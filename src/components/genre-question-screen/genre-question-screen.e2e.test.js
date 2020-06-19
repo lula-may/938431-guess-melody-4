@@ -10,7 +10,7 @@ Enzyme.configure({
 
 
 describe(`GenreQuestionComponent`, () => {
-  it(`On user's answering the form shouldn't be sent but should run callback`, () => {
+  it(`shouldn't send form but should run callback on user's answering`, () => {
     const onAnswer = jest.fn();
     const question = questions[1];
     const genreQuestionScreen = shallow(
@@ -29,9 +29,10 @@ describe(`GenreQuestionComponent`, () => {
     expect(onAnswer).toHaveBeenCalledTimes(1);
   });
 
-  it(`On user's answering parameters corresponding to "userAnswer" should be passed to the callback`, () => {
+  it(`should be supplied corresponding to "userAnswer" arguments to the callback on user's answering`, () => {
     const onAnswer = jest.fn((...args) => [...args]);
     const question = questions[1];
+    const checkedInputId = question.answers[1].id;
     const userAnswer = [false, true, false, false];
 
     const genreQuestionScreen = shallow(
@@ -42,9 +43,9 @@ describe(`GenreQuestionComponent`, () => {
     );
 
     const formElement = genreQuestionScreen.find(`form`);
-    const secondInput = genreQuestionScreen.find(`input`).at(1);
+    const checkedInput = genreQuestionScreen.find(`#${checkedInputId}`);
 
-    secondInput.simulate(`change`, {target: {checked: true}});
+    checkedInput.simulate(`change`, {target: {checked: true}});
     formElement.simulate(`submit`, {preventDefault: () => {}});
 
     // The first argument of the first call to "onAnswer" should match "question"

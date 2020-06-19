@@ -9,10 +9,12 @@ class GenreQuestionScreen extends PureComponent {
     this.state = {
       answers: [false, false, false, false]
     };
+
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
 
   render() {
-    const {onAnswer, question} = this.props;
+    const {question} = this.props;
     const {answers: userAnswers} = this.state;
     const {
       genre,
@@ -42,10 +44,7 @@ class GenreQuestionScreen extends PureComponent {
         <section className="game__screen">
           <h2 className="game__title">Выберите {genre} треки</h2>
           <form className="game__tracks"
-            onSubmit={(evt) => {
-              evt.preventDefault();
-              onAnswer(question, this.state.answers);
-            }}
+            onSubmit={this._handleFormSubmit}
           >
 
             {answers.map((answer, i) => {
@@ -56,8 +55,8 @@ class GenreQuestionScreen extends PureComponent {
                     <audio src={answer.src}></audio>
                   </div>
                   <div className="game__answer">
-                    <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`}
-                      id={`answer-${i}`}
+                    <input className="game__input visually-hidden" type="checkbox" name="answer" value={answer.id}
+                      id={answer.id}
                       checked={userAnswers[i]}
                       onChange={(evt) => {
                         const value = evt.target.checked;
@@ -67,7 +66,7 @@ class GenreQuestionScreen extends PureComponent {
                         });
                       }}
                     />
-                    <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
+                    <label className="game__check" htmlFor={answer.id}>Отметить</label>
                   </div>
                 </div>
               );
@@ -78,6 +77,13 @@ class GenreQuestionScreen extends PureComponent {
         </section>
       </section>
     );
+  }
+
+  _handleFormSubmit(evt) {
+    const {onAnswer, question} = this.props;
+    const userAnswers = this.state.answers;
+    evt.preventDefault();
+    onAnswer(question, userAnswers);
   }
 }
 
