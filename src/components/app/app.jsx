@@ -12,6 +12,7 @@ class App extends PureComponent {
     this.state = {
       step: -1
     };
+    this._handleAnswer = this._handleAnswer.bind(this);
   }
 
   render() {
@@ -23,7 +24,7 @@ class App extends PureComponent {
           <Route exact path="/">
             {this._renderGameScreen()}
           </Route>
-          <Route exact path="/dev-singer">
+          <Route exact path="/dev-artist">
             <ArtistQuestionScreen
               onAnswer={() => {}}
               question={questions[0]}/>
@@ -39,13 +40,13 @@ class App extends PureComponent {
   }
 
   _renderGameScreen() {
-    const {errorsAmount, questions} = this.props;
+    const {errorsCount, questions} = this.props;
     const {step} = this.state;
     const question = questions[step];
     if (step === -1 || step >= questions.length) {
       return (
         <WelcomeScreen
-          errorsAmount={errorsAmount}
+          errorsCount={errorsCount}
           onWelcomeButtonClick={() => {
             this.setState({step: 0});
           }}
@@ -58,11 +59,7 @@ class App extends PureComponent {
         case GameType.ARTIST:
           return (
             <ArtistQuestionScreen
-              onAnswer={() => {
-                this.setState((prevState) => ({
-                  step: prevState.step + 1
-                }));
-              }}
+              onAnswer={this._handleAnswer}
               question={question}
             />
           );
@@ -70,11 +67,7 @@ class App extends PureComponent {
         case GameType.GENRE:
           return (
             <GenreQuestionScreen
-              onAnswer={() => {
-                this.setState((prevState) => ({
-                  step: prevState.step + 1
-                }));
-              }}
+              onAnswer={this._handleAnswer}
               question={questions[1]}
             />
           );
@@ -82,11 +75,17 @@ class App extends PureComponent {
     }
     return null;
   }
+
+  _handleAnswer() {
+    this.setState((prevState) => ({
+      step: prevState.step + 1
+    }));
+  }
 }
 
 App.propTypes = {
-  errorsAmount: PropTypes.number.isRequired,
-  questions: PropTypes.array.isRequired
+  errorsCount: PropTypes.number.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default App;

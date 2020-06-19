@@ -12,7 +12,7 @@ describe(`WelcomeScreenComponent`, () => {
     const onWelcomeButtonClick = jest.fn();
     const welcomeScreen = shallow(
         <WelcomeScreen
-          errorsAmount={3}
+          errorsCount={3}
           onWelcomeButtonClick={onWelcomeButtonClick}
         />
     );

@@ -5,12 +5,12 @@ import questions from "./mocks/questions";
 
 const init = () => {
   const settings = {
-    errorsAmount: 3
+    errorsCount: 3
   };
 
   ReactDom.render(
       <App
-        errorsAmount={settings.errorsAmount}
+        errorsCount={settings.errorsCount}
         questions={questions}
       />,
       document.querySelector(`#root`)
