@@ -78,15 +78,18 @@ class AudioPlayer extends PureComponent {
   }
 
   _handleButtonClick() {
+    const {onPlayButtonClick} = this.props;
     this.setState({
       isPlaying: !this.state.isPlaying
     });
+    onPlayButtonClick();
   }
 }
 
 AudioPlayer.propTypes = {
+  isPlaying: PropTypes.bool.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
   src: PropTypes.string.isRequired,
-  isPlaying: PropTypes.bool.isRequired
 };
 
 export default AudioPlayer;
