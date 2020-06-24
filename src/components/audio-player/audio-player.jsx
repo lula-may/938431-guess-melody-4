@@ -1,4 +1,4 @@
-import React, {Fragment, PureComponent} from "react";
+import React, {Fragment, PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 
 class AudioPlayer extends PureComponent {
@@ -11,6 +11,7 @@ class AudioPlayer extends PureComponent {
       progress: 0,
     };
 
+    this._audioRef = createRef();
     this._handleButtonClick = this._handleButtonClick.bind(this);
   }
 
@@ -25,7 +26,9 @@ class AudioPlayer extends PureComponent {
           onClick={this._handleButtonClick}
         />
         <div className="track__status">
-          <audio />
+          <audio
+            ref={this._audioRef}
+          />
         </div>
 
       </Fragment>
@@ -34,41 +37,44 @@ class AudioPlayer extends PureComponent {
 
   componentDidMount() {
     const {src} = this.props;
-
-    this._audio = new Audio(src);
-
+    const audio = this._audioRef.current;
+    audio.src = src;
+    audio.loop = true;
     // Навешиваем обработчики на элемент audio
 
     // The canplaythrough event is fired when the user agent can play the media up to its end
     // without having to stop for further buffering of content.
-    this._audio.oncanplaythrough = () => this.setState({isLoading: false});
+    audio.oncanplaythrough = () => this.setState({isLoading: false});
 
     // The play event is fired when the paused property is changed from true to false,
     // as a result of the play method, or the autoplay attribute
-    this._audio.onplay = () => this.setState({isPlaying: true});
+    audio.onplay = () => this.setState({isPlaying: true});
 
     // The pause event is sent when a request to pause an activity is handled
     // and the activity has entered its paused state.
-    this._audio.onpause = () => this.setState({isPlaying: false});
+    audio.onpause = () => this.setState({isPlaying: false});
 
     // The timeupdate event is fired when the time indicated by the "currentTime" attribute has been updated
-    this._audio.ontimeupdate = () => this.setState({progress: this._audio.currentTime});
+    audio.ontimeupdate = () => this.setState({progress: audio.currentTime});
   }
 
   componentDidUpdate() {
+    const audio = this._audioRef.current;
+
     return this.state.isPlaying
-      ? this._audio.play()
-      : this._audio.pause();
+      ? audio.play()
+      : audio.pause();
   }
 
   componentWillUnmount() {
+    const audio = this._audioRef.current;
+
     // Очищаем ресурсы: удаляем обработчики и сам элемент audio
-    this._audio.oncanplaythrough = null;
-    this._audio.onplay = null;
-    this._audio.onpause = null;
-    this._audio.ontimeupdate = null;
-    this._audio.src = ``;
-    this._audio = null;
+    audio.oncanplaythrough = null;
+    audio.onplay = null;
+    audio.onpause = null;
+    audio.ontimeupdate = null;
+    audio.src = ``;
   }
 
   _handleButtonClick() {
