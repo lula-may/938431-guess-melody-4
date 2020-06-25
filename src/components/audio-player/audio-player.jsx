@@ -61,9 +61,11 @@ class AudioPlayer extends PureComponent {
   componentDidUpdate() {
     const audio = this._audioRef.current;
 
-    return this.state.isPlaying
-      ? audio.play()
-      : audio.pause();
+    if (this.props.isPlaying) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
   }
 
   componentWillUnmount() {
@@ -79,8 +81,9 @@ class AudioPlayer extends PureComponent {
 
   _handleButtonClick() {
     const {onPlayButtonClick} = this.props;
+    const {isPlaying} = this.state;
     this.setState({
-      isPlaying: !this.state.isPlaying
+      isPlaying: !isPlaying
     });
     onPlayButtonClick();
   }
