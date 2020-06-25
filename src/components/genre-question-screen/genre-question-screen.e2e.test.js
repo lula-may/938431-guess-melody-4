@@ -17,6 +17,7 @@ describe(`GenreQuestionComponent`, () => {
         <GenreQuestionScreen
           onAnswer={onAnswer}
           question={question}
+          renderPlayer={() => {}}
         />
     );
 
@@ -39,6 +40,7 @@ describe(`GenreQuestionComponent`, () => {
         <GenreQuestionScreen
           onAnswer={onAnswer}
           question={question}
+          renderPlayer={() => {}}
         />
     );
 

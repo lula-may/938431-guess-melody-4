@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import AudioPlayer from "../audio-player/audio-player.jsx";
 import {genreQuestionShape} from "../shapes";
 
 class GenreQuestionScreen extends PureComponent {
@@ -8,7 +7,6 @@ class GenreQuestionScreen extends PureComponent {
     super(props);
 
     this.state = {
-      activePlayer: 0,
       answers: [false, false, false, false]
     };
 
@@ -16,8 +14,8 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   render() {
-    const {question} = this.props;
-    const {answers: userAnswers, activePlayer} = this.state;
+    const {question, renderPlayer} = this.props;
+    const {answers: userAnswers} = this.state;
     const {
       genre,
       answers
@@ -33,13 +31,7 @@ class GenreQuestionScreen extends PureComponent {
           {answers.map((answer, i) => {
             return (
               <div key={answer.id} className="track">
-                <AudioPlayer
-                  src={answer.src}
-                  isPlaying={i === activePlayer}
-                  onPlayButtonClick = {() => {
-                    this.setState({activePlayer: activePlayer === i ? -1 : i});
-                  }}
-                />
+                {renderPlayer(answer.src, i)}
                 <div className="game__answer">
                   <input className="game__input visually-hidden" type="checkbox" name="answer" value={answer.id}
                     id={answer.id}
@@ -74,7 +66,8 @@ class GenreQuestionScreen extends PureComponent {
 
 GenreQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
-  question: PropTypes.shape(genreQuestionShape).isRequired
+  question: PropTypes.shape(genreQuestionShape).isRequired,
+  renderPlayer: PropTypes.func.isRequired,
 };
 
 export default GenreQuestionScreen;

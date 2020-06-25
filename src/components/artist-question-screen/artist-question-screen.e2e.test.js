@@ -20,6 +20,7 @@ it(`Should run callback with arguments corresponding to "userAnswer" on user's a
       <ArtistQuestionScreen
         onAnswer={onAnswer}
         question={question}
+        renderPlayer={() => {}}
       />
   );
 

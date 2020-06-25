@@ -10,6 +10,7 @@ it(`Should correctly render GenreQuestionScreen`, () => {
       <GenreQuestionScreen
         onAnswer={() => {}}
         question={question}
+        renderPlayer={() => {}}
       />, {
         createNodeMock: () => {
           return {};
