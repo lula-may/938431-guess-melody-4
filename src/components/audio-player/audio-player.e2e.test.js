@@ -10,6 +10,9 @@ configure({
 const src = `test.ogg`;
 
 describe(`Should set state property "isPlaying" on playButton click handler calling`, () => {
+  window.HTMLMediaElement.prototype.play = () => {};
+  window.HTMLMediaElement.prototype.pause = () => {};
+
   it(`once to false`, () => {
     const onPlayBluttonClick = jest.fn();
     const audioPlayer = mount(
