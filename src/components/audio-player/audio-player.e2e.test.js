@@ -9,12 +9,27 @@ configure({
 
 const src = `test.ogg`;
 
+it(`Should run callback on play button click`, () => {
+  const onPlayBluttonClick = jest.fn();
+  const audioPlayer = mount(
+      <AudioPlayer
+        isPlaying={true}
+        onPlayButtonClick={onPlayBluttonClick}
+        src={src}
+      />
+  );
+  const playButton = audioPlayer.find(`button`);
+  playButton.props().onClick();
+
+  expect(onPlayBluttonClick).toHaveBeenCalledTimes(1);
+});
+
 describe(`Should set state property "isPlaying" on playButton click handler calling`, () => {
   window.HTMLMediaElement.prototype.play = () => {};
   window.HTMLMediaElement.prototype.pause = () => {};
+  const onPlayBluttonClick = jest.fn();
 
   it(`once to false`, () => {
-    const onPlayBluttonClick = jest.fn();
     const audioPlayer = mount(
         <AudioPlayer
           isPlaying={true}
@@ -28,7 +43,6 @@ describe(`Should set state property "isPlaying" on playButton click handler call
   });
 
   it(`twice to true`, () => {
-    const onPlayBluttonClick = jest.fn();
     const audioPlayer = mount(
         <AudioPlayer
           isPlaying={true}
@@ -41,25 +55,5 @@ describe(`Should set state property "isPlaying" on playButton click handler call
 
     expect(audioPlayer.state().isPlaying).toBe(true);
   });
-
-  // Это неработающий тест, возможно причина в том, что jest не может воспроизводить аудио?
-  // А при вызове setState срабатывает componentDidUpdate, внутри которого вызывается audio.play()?
-  // И здесь вообще ничего не протестировать?
-  xit(`Should change class "track__button--pause" to "track__button--play" on play button click`, () => {
-    const onPlayBluttonClick = jest.fn();
-    const audioPlayer = mount(
-        <AudioPlayer
-          isPlaying={true}
-          onPlayButtonClick={onPlayBluttonClick}
-          src={src}
-        />
-    );
-    let playButton = audioPlayer.find(`button`);
-    playButton.simulate(`click`);
-
-    playButton = audioPlayer.find(`button`);
-    expect(playButton.hasClass(`track__button--play`)).toBe(true);
-    expect(onPlayBluttonClick).toHaveBeenCalledTimes(1);
-    expect(audioPlayer.state().isPlaying).toBe(false);
-  });
 });
+
