@@ -12,34 +12,39 @@ configure({
 const src = `test.ogg`;
 const id = 2;
 
-window.HTMLMediaElement.prototype.play = () => {};
-window.HTMLMediaElement.prototype.pause = () => {};
+describe(`WithAudioPlayer HOC`, () => {
+  beforeAll(() => {
+    window.HTMLMediaElement.prototype.play = () => {};
+    window.HTMLMediaElement.prototype.pause = () => {};
+  });
 
-it(`should set state property "activePlayerId" to id on playButton click and toggle playButton from "play" to "pause"`, () =>{
-  const MockComponent = ({renderPlayer}) => {
-    return (
-      <div>
-        {renderPlayer(src, id)}
-      </div>
+  it(`should set state property "activePlayerId" to id on playButton click and toggle playButton from "play" to "pause"`, () =>{
+    const MockComponent = ({renderPlayer}) => {
+      return (
+        <div>
+          {renderPlayer(src, id)}
+        </div>
+      );
+    };
+
+    const WithAudioPlayer = withActivePlayer(MockComponent);
+
+    const mockComponentWrapped = mount(
+        <WithAudioPlayer/>
     );
-  };
 
-  const WithAudioPlayer = withActivePlayer(MockComponent);
+    const player = mockComponentWrapped.find(AudioPlayer);
+    const playButton = mockComponentWrapped.find(`button`);
+    player.setState({isLoading: false});
 
-  const mockComponentWrapped = mount(
-      <WithAudioPlayer/>
-  );
+    playButton.simulate(`click`, {});
+    expect(mockComponentWrapped.state().activePlayerId).toBe(id);
+    expect(playButton.getDOMNode().className).toContain(`track__button--pause`);
 
-  const player = mockComponentWrapped.find(AudioPlayer);
-  const playButton = mockComponentWrapped.find(`button`);
-  player.setState({isLoading: false});
+    playButton.simulate(`click`, {});
+    expect(playButton.getDOMNode().className).toContain(`track__button--play`);
 
-  playButton.simulate(`click`, {});
-  expect(mockComponentWrapped.state().activePlayerId).toBe(id);
-  expect(playButton.hasClass(`track__button--pause`));
+    MockComponent.propTypes = PropTypes.func;
+  });
 
-  playButton.simulate(`click`, {});
-  expect(playButton.hasClass(`track__button--play`));
-
-  MockComponent.propTypes = PropTypes.func;
 });

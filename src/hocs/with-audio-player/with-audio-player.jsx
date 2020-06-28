@@ -9,6 +9,8 @@ const withActivePlayer = (Component) => {
       this.state = {
         activePlayerId: 0,
       };
+
+      this._setActivePlayerId = this._setActivePlayerId.bind(this);
     }
 
     render() {
@@ -18,18 +20,27 @@ const withActivePlayer = (Component) => {
         <Component
           {...this.props}
           renderPlayer={(src, id) => {
+            this.id = id;
             return (
               <AudioPlayer
                 src={src}
                 isPlaying={id === activePlayerId}
-                onPlayButtonClick={() => this.setState({
-                  activePlayerId: activePlayerId === id ? -1 : id
-                })}
+                onPlayButtonClick={this._setActivePlayerId(id)}
               />
             );
           }}
         />
       );
+    }
+
+    _setActivePlayerId(id) {
+      const {activePlayerId} = this.state;
+
+      return () => {
+        this.setState({
+          activePlayerId: activePlayerId === id ? -1 : id
+        });
+      };
     }
   }
 
