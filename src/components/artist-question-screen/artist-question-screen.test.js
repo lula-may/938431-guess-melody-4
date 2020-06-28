@@ -10,7 +10,12 @@ it(`Should render ArtistQuestionScreen`, () => {
       <ArtistQuestionScreen
         onAnswer={() => {}}
         question={question}
-      />
+        renderPlayer={() => {}}
+      />, {
+        createNodeMock: () => {
+          return {};
+        }
+      }
   )
   .toJSON();
 

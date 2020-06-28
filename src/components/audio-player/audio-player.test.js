@@ -1,23 +1,22 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import GenreQuestionScreen from "./genre-question-screen.jsx";
+import AudioPlayer from "./audio-player.jsx";
 import {questions} from "../../test-mocks/test-questions";
 
-const question = questions[1];
+const mockSrc = questions[0].song.src;
 
-it(`Should correctly render GenreQuestionScreen`, () => {
+it(`Should correctly render AudioPlayer Component`, () => {
   const tree = renderer.create(
-      <GenreQuestionScreen
-        onAnswer={() => {}}
-        question={question}
-        renderPlayer={() => {}}
+      <AudioPlayer
+        src={mockSrc}
+        isPlaying={false}
+        onPlayButtonClick={() => {}}
       />, {
         createNodeMock: () => {
           return {};
         }
       }
-  )
-  .toJSON();
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
