@@ -1,17 +1,55 @@
 import React from "react";
 import rerender from "react-test-renderer";
-import App from "./app";
+import {App} from "./app";
 import {questions} from "../../test-mocks/test-questions";
 
-const errorsCount = 4;
+describe(`App Component`, () => {
+  it(`should render WellcomeScreen`, () => {
+    const tree = rerender.create(
+        <App
+          errorsCount={3}
+          questions={questions}
+          onAnswer={() => {}}
+          onWelcomeButtonClick={() => {}}
+          step={-1}
+        />
+    )
+    .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 
-it(`App should render 4 errors`, () => {
-  const tree = rerender.create(
-      <App
-        errorsCount={errorsCount}
-        questions={questions}
-      />
-  )
-  .toJSON();
-  expect(tree).toMatchSnapshot();
+  it(`should render ArtistQuestionScreen`, () => {
+    const tree = rerender.create(
+        <App
+          errorsCount={3}
+          questions={questions}
+          onAnswer={() => {}}
+          onWelcomeButtonClick={() => {}}
+          step={0}
+        />,
+        {createNodeMock: () => {
+          return {};
+        }}
+    )
+    .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`should render GenreQuestionScreen`, () => {
+    const tree = rerender.create(
+        <App
+          errorsCount={3}
+          questions={questions}
+          onAnswer={() => {}}
+          onWelcomeButtonClick={() => {}}
+          step={1}
+        />,
+        {createNodeMock: () => {
+          return {};
+        }}
+    )
+    .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
 });
