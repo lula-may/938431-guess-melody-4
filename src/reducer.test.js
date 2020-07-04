@@ -67,10 +67,152 @@ describe(`ActionCreator`, () => {
     });
   });
 
-  it(`should return correct action for mistakes increment`, () => {
-    expect(ActionCreator.incrementMistake()).toEqual({
+  it(`should return action with payload 0 for mistakes increment on user's correct answering artist question`, () => {
+    const question = {
+      type: `artist`,
+      song: {
+        artist: `correct`,
+        src: ``
+      },
+      answers: [
+        {
+          artist: `correct`,
+          avatar: ``,
+          id: `artist0`
+        },
+        {
+          artist: `incorrect-1`,
+          avatar: ``,
+          id: `artist1`
+        },
+        {
+          artist: `incorrect-2`,
+          avatar: ``,
+          id: `artist2`
+        }
+      ]
+    };
+
+    const correctAnswer = {
+      artist: `correct`,
+      avatar: ``,
+      id: `artist0`
+    };
+
+    expect(ActionCreator.incrementMistake(question, correctAnswer)).toEqual({
+      type: ActionType.INCREMENT_MISTAKES,
+      payload: 0,
+    });
+  });
+
+  it(`should return action with payload 1 for mistakes increment on user's wrong answering artist question`, () => {
+    const question = {
+      type: `artist`,
+      song: {
+        artist: `correct`,
+        src: ``
+      },
+      answers: [
+        {
+          artist: `correct`,
+          avatar: ``,
+          id: `artist0`
+        },
+        {
+          artist: `incorrect-1`,
+          avatar: ``,
+          id: `artist1`
+        },
+        {
+          artist: `incorrect-2`,
+          avatar: ``,
+          id: `artist2`
+        }
+      ]
+    };
+
+    const wrongAnswer = {
+      artist: `incorrect-1`,
+      avatar: ``,
+      id: `artist1`
+    };
+
+    expect(ActionCreator.incrementMistake(question, wrongAnswer)).toEqual({
       type: ActionType.INCREMENT_MISTAKES,
       payload: 1,
     });
   });
+
+  it(`should return action with payload 0 for mistakes increment on user's correct answering genre question`, () => {
+    const question = {
+      type: `genre`,
+      genre: `jazz`,
+      answers: [
+        {
+          src: ``,
+          genre: `blues`,
+          id: `answer-3`
+        },
+        {
+          src: ``,
+          genre: `jazz`,
+          id: `answer-4`
+        },
+        {
+          src: ``,
+          genre: `folk`,
+          id: `answer-5`
+        },
+        {
+          src: ``,
+          genre: `jazz`,
+          id: `answer-6`
+        }
+      ]
+    };
+
+    const correctAnswer = [false, true, false, true];
+
+    expect(ActionCreator.incrementMistake(question, correctAnswer)).toEqual({
+      type: ActionType.INCREMENT_MISTAKES,
+      payload: 0,
+    });
+  });
+
+  it(`should return action with payload 1 for mistakes increment on user's wrong answering genre question`, () => {
+    const question = {
+      type: `genre`,
+      genre: `jazz`,
+      answers: [
+        {
+          src: ``,
+          genre: `blues`,
+          id: `answer-3`
+        },
+        {
+          src: ``,
+          genre: `jazz`,
+          id: `answer-4`
+        },
+        {
+          src: ``,
+          genre: `folk`,
+          id: `answer-5`
+        },
+        {
+          src: ``,
+          genre: `jazz`,
+          id: `answer-6`
+        }
+      ]
+    };
+
+    const correctAnswer = [false, true, false, false];
+
+    expect(ActionCreator.incrementMistake(question, correctAnswer)).toEqual({
+      type: ActionType.INCREMENT_MISTAKES,
+      payload: 1,
+    });
+  });
+
 });
