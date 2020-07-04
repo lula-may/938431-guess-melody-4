@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mistakes Component should render correctly 0 mistakes 1`] = `
+<div
+  className="game__mistakes"
+/>
+`;
+
+exports[`Mistakes Component should render correctly 3 mistakes 1`] = `
+<div
+  className="game__mistakes"
+>
+  <div
+    className="wrong"
+  />
+  <div
+    className="wrong"
+  />
+  <div
+    className="wrong"
+  />
+</div>
+`;
