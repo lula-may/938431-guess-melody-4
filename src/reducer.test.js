@@ -1,9 +1,12 @@
 import {reducer, ActionCreator, ActionType} from "./reducer.js";
+import questions from "./mocks/questions.js";
 
 describe(`Reducer`, () => {
   it(`should return initialState on empty parameters supplied`, () => {
     expect(reducer(undefined, {})).toEqual({
+      maxMistakes: 3,
       mistakes: 0,
+      questions,
       step: -1
     });
   });

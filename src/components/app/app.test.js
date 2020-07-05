@@ -15,7 +15,7 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
-            errorsCount={3}
+            maxMistakes={3}
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
@@ -34,7 +34,7 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
-            errorsCount={3}
+            maxMistakes={3}
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
@@ -56,7 +56,7 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
-            errorsCount={3}
+            maxMistakes={3}
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}

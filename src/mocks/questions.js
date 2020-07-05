@@ -1,8 +1,4 @@
 const AVATAR_URL = `https://api.adorable.io/avatars`;
-const MAX_NUMBER = 10;
-const MIN_NUMBER = 1;
-
-const getRandomInteger = (min, max) => Math.round(Math.random() * (max - min) + min);
 
 export default [
   {
@@ -14,17 +10,17 @@ export default [
     answers: [
       {
         artist: `Chris Rea`,
-        avatar: `${AVATAR_URL}/${getRandomInteger(MIN_NUMBER, MAX_NUMBER)}`,
+        avatar: `${AVATAR_URL}/1`,
         id: `artist0`
       },
       {
         artist: `Dire Straits`,
-        avatar: `${AVATAR_URL}/${getRandomInteger(MIN_NUMBER, MAX_NUMBER)}`,
+        avatar: `${AVATAR_URL}/2`,
         id: `artist1`
       },
       {
         artist: `Joe Cocker`,
-        avatar: `${AVATAR_URL}/${getRandomInteger(MIN_NUMBER, MAX_NUMBER)}`,
+        avatar: `${AVATAR_URL}/3`,
         id: `artist2`
       }
     ]
