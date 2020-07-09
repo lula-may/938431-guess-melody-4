@@ -1,5 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+
+import GenreQuestionItem from "../genre-question-item/genre-question-item.jsx";
 import {genreQuestionShape} from "../shapes";
 
 class GenreQuestionScreen extends PureComponent {
@@ -7,12 +9,12 @@ class GenreQuestionScreen extends PureComponent {
     super(props);
 
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
-    this._setChangeHandler = this._setChangeHandler.bind(this);
   }
 
   render() {
     const {
       question: {genre, answers},
+      onChange,
       renderPlayer,
       userAnswers,
     } = this.props;
@@ -26,17 +28,14 @@ class GenreQuestionScreen extends PureComponent {
 
           {answers.map((answer, i) => {
             return (
-              <div key={answer.id} className="track">
-                {renderPlayer(answer.src, i)}
-                <div className="game__answer">
-                  <input className="game__input visually-hidden" type="checkbox" name="answer" value={answer.id}
-                    id={answer.id}
-                    checked={userAnswers[i]}
-                    onChange={this._setChangeHandler(i)}
-                  />
-                  <label className="game__check" htmlFor={answer.id}>Отметить</label>
-                </div>
-              </div>
+              <GenreQuestionItem
+                key={answer.id}
+                answer={answer}
+                id={i}
+                onChange={onChange}
+                renderPlayer={renderPlayer}
+                userAnswer={userAnswers[i]}
+              />
             );
           })}
 
@@ -50,14 +49,6 @@ class GenreQuestionScreen extends PureComponent {
     const {onAnswer} = this.props;
     evt.preventDefault();
     onAnswer();
-  }
-
-  _setChangeHandler(i) {
-    const {onChange} = this.props;
-    return (evt) => {
-      const value = evt.target.checked;
-      onChange(i, value);
-    };
   }
 }
 
