@@ -2,7 +2,7 @@ import React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import AudioPlayer from "../../components/audio-player/audio-player.jsx";
-import withActivePlayer from "./with-audio-player.jsx";
+import withActivePlayer from "./with-active-player.jsx";
 import PropTypes from "prop-types";
 
 configure({

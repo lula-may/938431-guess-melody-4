@@ -7,7 +7,7 @@ import ArtistQuestionScreen from "../artist-question-screen/artist-question-scre
 import GameScreen from "../game-screen/game-screen.jsx";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
 import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
-import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player.jsx";
+import withAudioPlayer from "../../hocs/with-active-player/with-active-player.jsx";
 
 import {ActionCreator} from "../../reducer.js";
 import {GameType} from "../../const";
