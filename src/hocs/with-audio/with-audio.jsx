@@ -34,10 +34,18 @@ const withAudio = (Component) => {
       const audio = this._audioRef.current;
       audio.src = src;
       audio.loop = true;
-      audio.oncanplaythrough = () => this.setState({isLoading: false});
-      audio.onplay = () => this.setState({isPlaying: true});
-      audio.onpause = () => this.setState({isPlaying: false});
-      audio.ontimeupdate = () => this.setState({progress: audio.currentTime});
+      audio.oncanplaythrough = () => this.setState({
+        isLoading: false
+      });
+      audio.onplay = () => this.setState({
+        isPlaying: true
+      });
+      audio.onpause = () => this.setState({
+        isPlaying: false
+      });
+      audio.ontimeupdate = () => this.setState({
+        progress: Math.floor(audio.currentTime)
+      });
     }
 
     componentDidUpdate() {
