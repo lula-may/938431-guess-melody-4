@@ -6,20 +6,16 @@ class GenreQuestionScreen extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      answers: [false, false, false, false]
-    };
-
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
+    this._setChangeHandler = this._setChangeHandler.bind(this);
   }
 
   render() {
-    const {question, renderPlayer} = this.props;
-    const {answers: userAnswers} = this.state;
     const {
-      genre,
-      answers
-    } = question;
+      question: {genre, answers},
+      renderPlayer,
+      userAnswers,
+    } = this.props;
 
     return (
       <section className="game__screen">
@@ -36,13 +32,7 @@ class GenreQuestionScreen extends PureComponent {
                   <input className="game__input visually-hidden" type="checkbox" name="answer" value={answer.id}
                     id={answer.id}
                     checked={userAnswers[i]}
-                    onChange={(evt) => {
-                      const value = evt.target.checked;
-
-                      this.setState({
-                        answers: [...userAnswers.slice(0, i), value, ...userAnswers.slice(i + 1)]
-                      });
-                    }}
+                    onChange={this._setChangeHandler(i)}
                   />
                   <label className="game__check" htmlFor={answer.id}>Отметить</label>
                 </div>
@@ -57,17 +47,26 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   _handleFormSubmit(evt) {
-    const {onAnswer, question} = this.props;
-    const userAnswers = this.state.answers;
+    const {onAnswer} = this.props;
     evt.preventDefault();
-    onAnswer(question, userAnswers);
+    onAnswer();
+  }
+
+  _setChangeHandler(i) {
+    const {onChange} = this.props;
+    return (evt) => {
+      const value = evt.target.checked;
+      onChange(i, value);
+    };
   }
 }
 
 GenreQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   question: PropTypes.shape(genreQuestionShape).isRequired,
   renderPlayer: PropTypes.func.isRequired,
+  userAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired
 };
 
 export default GenreQuestionScreen;
