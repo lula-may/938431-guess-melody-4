@@ -375,7 +375,7 @@ exports[`App Component should render GenreQuestionScreen 1`] = `
 </section>
 `;
 
-exports[`App Component should render WellcomeScreen 1`] = `
+exports[`App Component should render WelcomeScreen 1`] = `
 <section
   className="welcome"
 >

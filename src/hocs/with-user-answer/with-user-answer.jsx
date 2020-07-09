@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {genreQuestionShape} from "../shapes";
+import {genreQuestionShape} from "../../components/shapes.js";
 
 const withUserAnswer = (Component) => {
 
@@ -17,11 +17,13 @@ const withUserAnswer = (Component) => {
     }
 
     render() {
+      const {answers} = this.state;
       return (
         <Component
           {...this.props}
           onAnswer={this.handleUserAnswer}
           onChange={this.handleChange}
+          userAnswers={answers}
         />
       );
     }

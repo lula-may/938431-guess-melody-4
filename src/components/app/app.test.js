@@ -8,7 +8,7 @@ import {questions} from "../../test-mocks/test-questions";
 const mockStore = configureStore([]);
 
 describe(`App Component`, () => {
-  it(`should render WellcomeScreen`, () => {
+  it(`should render WelcomeScreen`, () => {
     const store = mockStore({
       mistakes: 0
     });
