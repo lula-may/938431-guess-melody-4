@@ -117,40 +117,22 @@ describe(`Reducer`, () => {
     });
   });
 
-  it(`should return initialState when questions are over`, () => {
+  it(`should return default state with step=0 when RESET action supplied`, () => {
     expect(reducer({
       maxMistakes: 3,
       mistakes: 1,
       questions,
-      step: questions.length - 1,
+      step: questions.length,
     }, {
-      type: ActionType.INCREMENT_STEP,
-      payload: 1,
+      type: ActionType.RESET,
+      payload: null,
     })).toEqual({
       maxMistakes: 3,
       mistakes: 0,
       questions,
-      step: -1
+      step: 0,
     });
   });
-
-  it(`should return initialState when user made more mistakes then allowed`, () => {
-    expect(reducer({
-      maxMistakes: 3,
-      mistakes: 3,
-      questions,
-      step: 3,
-    }, {
-      type: ActionType.INCREMENT_MISTAKES,
-      payload: 1,
-    })).toEqual({
-      maxMistakes: 3,
-      mistakes: 0,
-      questions,
-      step: -1
-    });
-  });
-
 });
 
 describe(`ActionCreator`, () => {
@@ -199,6 +181,13 @@ describe(`ActionCreator`, () => {
     expect(ActionCreator.incrementMistake(question, correctAnswer)).toEqual({
       type: ActionType.INCREMENT_MISTAKES,
       payload: 0,
+    });
+  });
+
+  it(`should return correct action for gameReset`, () => {
+    expect(ActionCreator.resetGame()).toEqual({
+      type: ActionType.RESET,
+      payload: null,
     });
   });
 });

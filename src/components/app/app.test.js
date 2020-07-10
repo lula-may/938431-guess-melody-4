@@ -20,6 +20,7 @@ describe(`App Component`, () => {
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
+            resetGame={() => {}}
             step={-1}
           />
         </Provider>
@@ -40,6 +41,7 @@ describe(`App Component`, () => {
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
+            resetGame={() => {}}
             step={0}
           />
         </Provider>,
@@ -63,6 +65,7 @@ describe(`App Component`, () => {
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
+            resetGame={() => {}}
             step={1}
           />
         </Provider>,
@@ -86,6 +89,7 @@ describe(`App Component`, () => {
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
+            resetGame={() => {}}
             step={1}
           />
         </Provider>,
@@ -109,6 +113,7 @@ describe(`App Component`, () => {
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
+            resetGame={() => {}}
             step={3}
           />
         </Provider>,
