@@ -23,7 +23,7 @@ exports[`WinScreen Component should rendrer correctly WinScreen 1`] = `
     className="result__total"
   >
     Вы ответили правильно на 
-    6
+    4
      вопросов и совершили 
     2
      ошибки

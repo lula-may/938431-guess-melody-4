@@ -65,7 +65,7 @@ class App extends PureComponent {
       );
     }
 
-    if (mistakes >= maxMistakes) {
+    if (mistakes > maxMistakes) {
       return (
         <GameOverScreen
           onReplayButtonClick={resetGame}
@@ -104,7 +104,7 @@ class App extends PureComponent {
             >
               <GenreQuestionScreenWrapped
                 onAnswer={onAnswer}
-                question={questions[1]}
+                question={question}
               />
             </GameScreen>
           );

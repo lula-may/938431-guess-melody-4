@@ -466,7 +466,7 @@ exports[`App Component should render WinScreen 1`] = `
     className="result__total"
   >
     Вы ответили правильно на 
-    2
+    0
      вопросов и совершили 
     2
      ошибки

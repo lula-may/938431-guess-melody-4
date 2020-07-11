@@ -85,12 +85,12 @@ describe(`App Component`, () => {
         <Provider store={store}>
           <App
             maxMistakes={3}
-            mistakes={3}
+            mistakes={4}
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
             resetGame={() => {}}
-            step={1}
+            step={4}
           />
         </Provider>,
         {createNodeMock: () => {

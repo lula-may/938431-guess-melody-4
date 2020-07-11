@@ -18,7 +18,6 @@ class GenreQuestionScreen extends PureComponent {
       renderPlayer,
       userAnswers,
     } = this.props;
-
     return (
       <section className="game__screen">
         <h2 className="game__title">Выберите {genre} треки</h2>
