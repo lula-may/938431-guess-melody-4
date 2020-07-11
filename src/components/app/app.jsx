@@ -74,11 +74,12 @@ class App extends PureComponent {
     }
 
     if (step >= questions.length) {
+      const correctAnswersCount = questions.length - mistakes;
       return (
         <WinScreen
+          correctAnswersCount={correctAnswersCount}
           mistakesCount={mistakes}
           onReplayButtonClick={resetGame}
-          questionsCount={questions.length}
         />
       );
     }

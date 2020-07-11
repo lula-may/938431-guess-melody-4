@@ -85,7 +85,7 @@ describe(`App Component`, () => {
         <Provider store={store}>
           <App
             maxMistakes={3}
-            mistakes={4}
+            mistakes={3}
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
