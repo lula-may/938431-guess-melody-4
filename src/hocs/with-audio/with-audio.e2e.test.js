@@ -32,7 +32,29 @@ describe(`WithAudioPlayer HOC`, () => {
     onPlayButtonClick: PropTypes.func.isRequired,
   };
 
-  it(`should call audio.play on playButton click`, () =>{
+  it(`should call audio.play on when props isPlaying: true passed`, () =>{
+
+    const WithAudio = withAudio(MockPlayer);
+
+    const wrapper = mount(
+        <WithAudio
+          isPlaying={true}
+          onPlayButtonClick={() => {}}
+          src=""
+        />
+    );
+
+    const {_audioRef} = wrapper.instance();
+    jest.spyOn(_audioRef.current, `play`);
+
+    wrapper.instance().componentDidMount();
+    wrapper.setState({isLoading: false});
+
+    expect(_audioRef.current.play).toHaveBeenCalledTimes(1);
+
+  });
+
+  it(`should call audio.pause when props isPlaying: false passed`, () =>{
 
     const WithAudio = withAudio(MockPlayer);
 
@@ -46,33 +68,10 @@ describe(`WithAudioPlayer HOC`, () => {
 
     const {_audioRef} = wrapper.instance();
 
-    jest.spyOn(_audioRef.current, `play`);
-
-    wrapper.instance().componentDidMount();
-    wrapper.find(`button`).simulate(`click`);
-
-    expect(_audioRef.current.play).toHaveBeenCalledTimes(1);
-
-  });
-
-  it(`should call audio.pause on playButton click`, () =>{
-
-    const WithAudio = withAudio(MockPlayer);
-
-    const wrapper = mount(
-        <WithAudio
-          isPlaying={true}
-          onPlayButtonClick={() => {}}
-          src=""
-        />
-    );
-
-    const {_audioRef} = wrapper.instance();
-
     jest.spyOn(_audioRef.current, `pause`);
 
     wrapper.instance().componentDidMount();
-    wrapper.find(`button`).simulate(`click`);
+    wrapper.setState({isLoading: false});
 
     expect(_audioRef.current.pause).toHaveBeenCalledTimes(1);
   });
