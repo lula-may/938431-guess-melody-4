@@ -65,7 +65,7 @@ class App extends PureComponent {
       );
     }
 
-    if (mistakes > maxMistakes) {
+    if (mistakes >= maxMistakes) {
       return (
         <GameOverScreen
           onReplayButtonClick={resetGame}

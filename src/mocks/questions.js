@@ -80,8 +80,9 @@ export default [
     genre: `rock and roll`,
     answers: [
       {
-        src: `https://upload.wikimedia.org/wikipedia/ru/2/23/Michael_Jackson_%E2%80%94_Earth_Song.ogg`,
-        genre: `pop`,
+        src: `https://upload.wikimedia.org/wikipedia/en/3/3a/Bill_Haley_and_His_Comets_-_Rock_Around_the_Clock.ogg`,
+        genre: `rock and roll`,
+
         id: `treck4`
       },
       {
@@ -90,8 +91,8 @@ export default [
         id: `treck5`,
       },
       {
-        src: `https://upload.wikimedia.org/wikipedia/en/3/3a/Bill_Haley_and_His_Comets_-_Rock_Around_the_Clock.ogg`,
-        genre: `rock and roll`,
+        src: `https://upload.wikimedia.org/wikipedia/ru/2/23/Michael_Jackson_%E2%80%94_Earth_Song.ogg`,
+        genre: `pop`,
         id: `treck6`,
       },
       {
