@@ -1,58 +1,7 @@
 import {reducer, ActionCreator, ActionType} from "./reducer.js";
+import questions from "./mocks/questions.js";
 
 const AVATAR_URL = `https://api.adorable.io/avatars`;
-const questions = [
-  {
-    type: `artist`,
-    song: {
-      artist: `Dire Straits`,
-      src: `https://upload.wikimedia.org/wikipedia/en/c/cb/Dire_Straits_-_Money_for_Nothing.ogg`
-    },
-    answers: [
-      {
-        artist: `Chris Rea`,
-        avatar: `${AVATAR_URL}/1`,
-        id: `artist0`
-      },
-      {
-        artist: `Dire Straits`,
-        avatar: `${AVATAR_URL}/2`,
-        id: `artist1`
-      },
-      {
-        artist: `Joe Cocker`,
-        avatar: `${AVATAR_URL}/3`,
-        id: `artist2`
-      }
-    ]
-  },
-  {
-    type: `genre`,
-    genre: `rock`,
-    answers: [
-      {
-        src: `https://upload.wikimedia.org/wikipedia/en/a/ae/Adele_Skyfall_sample.ogg`,
-        genre: `pop`,
-        id: `treck0`
-      },
-      {
-        src: `https://upload.wikimedia.org/wikipedia/en/3/3f/Layla_%28Acoustic%29_Sample.ogg`,
-        genre: `rock`,
-        id: `treck1`,
-      },
-      {
-        src: `https://upload.wikimedia.org/wikipedia/en/e/e1/50_Cent_-_Hustler%27s_Ambition.ogg`,
-        genre: `hip hop`,
-        id: `treck2`,
-      },
-      {
-        src: `https://upload.wikimedia.org/wikipedia/en/7/75/Queen_I_want_to_break_free.ogg`,
-        genre: `rock`,
-        id: `treck3`
-      }
-    ]
-  }
-];
 
 describe(`Reducer`, () => {
   it(`should return initialState when empty parameters supplied`, () => {
@@ -117,40 +66,22 @@ describe(`Reducer`, () => {
     });
   });
 
-  it(`should return initialState when questions are over`, () => {
+  it(`should return default state with step=0 when RESET action supplied`, () => {
     expect(reducer({
       maxMistakes: 3,
       mistakes: 1,
       questions,
-      step: questions.length - 1,
+      step: questions.length,
     }, {
-      type: ActionType.INCREMENT_STEP,
-      payload: 1,
+      type: ActionType.RESET,
+      payload: null,
     })).toEqual({
       maxMistakes: 3,
       mistakes: 0,
       questions,
-      step: -1
+      step: 0,
     });
   });
-
-  it(`should return initialState when user made more mistakes then allowed`, () => {
-    expect(reducer({
-      maxMistakes: 3,
-      mistakes: 3,
-      questions,
-      step: 3,
-    }, {
-      type: ActionType.INCREMENT_MISTAKES,
-      payload: 1,
-    })).toEqual({
-      maxMistakes: 3,
-      mistakes: 0,
-      questions,
-      step: -1
-    });
-  });
-
 });
 
 describe(`ActionCreator`, () => {
@@ -199,6 +130,13 @@ describe(`ActionCreator`, () => {
     expect(ActionCreator.incrementMistake(question, correctAnswer)).toEqual({
       type: ActionType.INCREMENT_MISTAKES,
       payload: 0,
+    });
+  });
+
+  it(`should return correct action for gameReset`, () => {
+    expect(ActionCreator.resetGame()).toEqual({
+      type: ActionType.RESET,
+      payload: null,
     });
   });
 });

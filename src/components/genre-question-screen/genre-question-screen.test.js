@@ -9,8 +9,10 @@ it(`Should correctly render GenreQuestionScreen`, () => {
   const tree = renderer.create(
       <GenreQuestionScreen
         onAnswer={() => {}}
+        onChange={() => {}}
         question={question}
         renderPlayer={() => {}}
+        userAnswers={[false, false, false, false]}
       />, {
         createNodeMock: () => {
           return {};
