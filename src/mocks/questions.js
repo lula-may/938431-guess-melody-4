@@ -90,7 +90,7 @@ export default [
         id: `treck5`,
       },
       {
-        src: `https://upload.wikimedia.org/wikipedia/en/0/0c/She_Loves_You_%28Beatles_song_-_sample%29.ogg`,
+        src: `https://upload.wikimedia.org/wikipedia/en/3/3a/Bill_Haley_and_His_Comets_-_Rock_Around_the_Clock.ogg`,
         genre: `rock and roll`,
         id: `treck6`,
       },
