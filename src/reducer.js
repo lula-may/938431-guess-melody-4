@@ -1,17 +1,19 @@
 import {extend} from "./utils.js";
 import {GameType} from "./const.js";
-import questions from "./mocks/questions.js";
+import adapter from "./adapter.js";
+// import questions from "./mocks/questions.js";
 
 const initialState = {
   mistakes: 0,
   step: -1,
-  questions,
+  questions: [],
   maxMistakes: 3
 };
 
 const ActionType = {
   INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
   INCREMENT_STEP: `INCREMENT_STEP`,
+  LOAD_QUESTIONS: `LOAD_QUESTIONS`,
   RESET: `RESET`,
 };
 
@@ -26,6 +28,11 @@ const isGenreAnswerCorrect = (question, userAnswer) => {
 };
 
 const ActionCreator = {
+  loadQuestions: (questions) => ({
+    type: ActionType.LOAD_QUESTIONS,
+    payload: questions,
+  }),
+
   incrementStep: () => ({
     type: ActionType.INCREMENT_STEP,
     payload: 1
@@ -55,6 +62,15 @@ const ActionCreator = {
   },
 };
 
+const Operation = {
+  loadQuestions: () => (dispatch, getState, api) => {
+    return api.get(`/questions`)
+    .then((response) => {
+      dispatch(ActionCreator.loadQuestions(adapter(response.data)));
+    });
+  },
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.INCREMENT_MISTAKES:
@@ -70,9 +86,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.RESET:
       return extend(initialState, {
         step: 0,
+        questions: state.questions,
       });
+
+    case ActionType.LOAD_QUESTIONS:
+      const questions = action.payload;
+      return extend(state, {questions});
   }
   return state;
 };
 
-export {reducer, ActionCreator, ActionType};
+export {reducer, ActionCreator, ActionType, Operation};
