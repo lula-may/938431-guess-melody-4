@@ -4,14 +4,17 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app";
 import {questions} from "../../test-mocks/test-questions";
+import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
 describe(`App Component`, () => {
   it(`should render WelcomeScreen`, () => {
     const store = mockStore({
-      mistakes: 0
-    });
+      [NameSpace.GAME]: {
+        mistakes: 0,
+      }});
+
     const tree = rerender.create(
         <Provider store={store}>
           <App
@@ -31,13 +34,14 @@ describe(`App Component`, () => {
 
   it(`should render ArtistQuestionScreen`, () => {
     const store = mockStore({
-      mistakes: 0
-    });
+      [NameSpace.GAME]: {
+        mistakes: 0,
+      }});
     const tree = rerender.create(
         <Provider store={store}>
           <App
             maxMistakes={3}
-            mistakes={2}
+            mistakes={0}
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
@@ -55,13 +59,14 @@ describe(`App Component`, () => {
 
   it(`should render GenreQuestionScreen`, () => {
     const store = mockStore({
-      mistakes: 0
-    });
+      [NameSpace.GAME]: {
+        mistakes: 0,
+      }});
     const tree = rerender.create(
         <Provider store={store}>
           <App
             maxMistakes={3}
-            mistakes={2}
+            mistakes={0}
             questions={questions}
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
@@ -79,8 +84,9 @@ describe(`App Component`, () => {
 
   it(`should render GameOverScreen`, () => {
     const store = mockStore({
-      mistakes: 3
-    });
+      [NameSpace.GAME]: {
+        mistakes: 3,
+      }});
     const tree = rerender.create(
         <Provider store={store}>
           <App
@@ -103,8 +109,9 @@ describe(`App Component`, () => {
 
   it(`should render WinScreen`, () => {
     const store = mockStore({
-      mistakes: 2
-    });
+      [NameSpace.GAME]: {
+        mistakes: 2,
+      }});
     const tree = rerender.create(
         <Provider store={store}>
           <App

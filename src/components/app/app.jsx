@@ -12,8 +12,10 @@ import WinScreen from "../win-screen/win-screen.jsx";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player.jsx";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer.jsx";
 
-import {ActionCreator} from "../../reducer/reducer.js";
+import {ActionCreator} from "../../reducer/game/game.js";
 import {GameType} from "../../const";
+import {getMaxMistakes, getMistakes, getStep} from "../../reducer/game/selectors.js";
+import {getQuestions} from "../../reducer/data/selectors.js";
 
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withActivePlayer(withUserAnswer(GenreQuestionScreen));
@@ -121,10 +123,10 @@ class App extends PureComponent {
   }
 }
 const mapStateToProps = (state) => ({
-  maxMistakes: state.maxMistakes,
-  mistakes: state.mistakes,
-  questions: state.questions,
-  step: state.step,
+  maxMistakes: getMaxMistakes(state),
+  mistakes: getMistakes(state),
+  questions: getQuestions(state),
+  step: getStep(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
