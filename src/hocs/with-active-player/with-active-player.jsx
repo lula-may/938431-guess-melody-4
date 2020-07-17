@@ -14,6 +14,7 @@ const withActivePlayer = (Component) => {
       };
 
       this._setActivePlayerId = this._setActivePlayerId.bind(this);
+      this._resetActivePlayer = this._resetActivePlayer.bind(this);
     }
 
     render() {
@@ -31,6 +32,7 @@ const withActivePlayer = (Component) => {
               />
             );
           }}
+          onQuestionChange={this._resetActivePlayer}
         />
       );
     }
@@ -43,6 +45,12 @@ const withActivePlayer = (Component) => {
           activePlayerId: activePlayerId === id ? -1 : id
         });
       };
+    }
+
+    _resetActivePlayer() {
+      this.setState({
+        activePlayerId: 0
+      });
     }
   }
 

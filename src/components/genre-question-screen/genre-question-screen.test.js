@@ -10,6 +10,7 @@ it(`Should correctly render GenreQuestionScreen`, () => {
       <GenreQuestionScreen
         onAnswer={() => {}}
         onChange={() => {}}
+        onQuestionChange={() => {}}
         question={question}
         renderPlayer={() => {}}
         userAnswers={[false, false, false, false]}

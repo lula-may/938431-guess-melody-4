@@ -16,6 +16,7 @@ describe(`GenreQuestionComponent`, () => {
     const genreQuestionScreen = shallow(
         <GenreQuestionScreen
           onAnswer={onAnswer}
+          onQuestionChange={() => {}}
           onChange={() => {}}
           question={question}
           renderPlayer={() => {}}
@@ -41,6 +42,7 @@ describe(`GenreQuestionComponent`, () => {
         <GenreQuestionScreen
           onAnswer={onAnswer}
           onChange={() => {}}
+          onQuestionChange={() => {}}
           question={question}
           renderPlayer={() => {}}
           userAnswers={userAnswers}
@@ -64,6 +66,7 @@ describe(`GenreQuestionComponent`, () => {
         <GenreQuestionScreen
           onAnswer={() => {}}
           onChange={onChange}
+          onQuestionChange={() => {}}
           question={question}
           renderPlayer={() => {}}
           userAnswers={userAnswers}

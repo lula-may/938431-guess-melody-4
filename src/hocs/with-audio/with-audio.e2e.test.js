@@ -8,7 +8,7 @@ configure({
   adapter: new Adapter()
 });
 
-describe(`WithAudioPlayer HOC`, () => {
+describe(`WithAudio HOC`, () => {
   beforeAll(() => {
     window.HTMLMediaElement.prototype.play = () => {};
     window.HTMLMediaElement.prototype.pause = () => {};
