@@ -6,7 +6,8 @@ import thunk from "redux-thunk";
 
 import {createApi} from "./api.js";
 import App from "./components/app/app.jsx";
-import {reducer, Operation} from "./reducer.js";
+import reducer from "./reducer/reducer.js";
+import {Operation as DataOperation} from "./reducer/data/data.js";
 
 const api = createApi(() => {});
 
@@ -17,7 +18,7 @@ const store = createStore(reducer,
     )
 );
 
-store.dispatch(Operation.loadQuestions());
+store.dispatch(DataOperation.loadQuestions());
 
 const init = () => {
   ReactDom.render(

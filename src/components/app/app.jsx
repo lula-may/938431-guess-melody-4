@@ -12,7 +12,7 @@ import WinScreen from "../win-screen/win-screen.jsx";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player.jsx";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer.jsx";
 
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/reducer.js";
 import {GameType} from "../../const";
 
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
