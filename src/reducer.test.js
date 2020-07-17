@@ -1,5 +1,7 @@
-import {reducer, ActionCreator, ActionType} from "./reducer.js";
-import questions from "./mocks/questions.js";
+import {reducer, ActionCreator, ActionType, Operation} from "./reducer.js";
+import MockAdapter from "axios-mock-adapter";
+import {createApi} from "./api.js";
+import {questions} from "./test-mocks/test-questions.js";
 
 const AVATAR_URL = `https://api.adorable.io/avatars`;
 
@@ -8,7 +10,7 @@ describe(`Reducer`, () => {
     expect(reducer(undefined, {})).toEqual({
       maxMistakes: 3,
       mistakes: 0,
-      questions,
+      questions: [],
       step: -1
     });
   });
@@ -82,6 +84,24 @@ describe(`Reducer`, () => {
       step: 0,
     });
   });
+
+  it(`should return default state when load question action supplied`, () => {
+    expect(reducer({
+      maxMistakes: 3,
+      mistakes: 0,
+      questions: [],
+      step: -1,
+    }, {
+      type: ActionType.LOAD_QUESTIONS,
+      payload: questions,
+    })).toEqual({
+      maxMistakes: 3,
+      mistakes: 0,
+      questions,
+      step: -1,
+    });
+  });
+
 });
 
 describe(`ActionCreator`, () => {
@@ -96,7 +116,7 @@ describe(`ActionCreator`, () => {
     const question = questions[0];
 
     const correctAnswer = {
-      artist: `Dire Straits`,
+      artist: `Lady Gaga`,
       avatar: `${AVATAR_URL}/2`,
       id: `artist1`
     };
@@ -138,5 +158,33 @@ describe(`ActionCreator`, () => {
       type: ActionType.RESET,
       payload: null,
     });
+  });
+
+  it(`should return correct action for questions loading`, () => {
+    expect(ActionCreator.loadQuestions(questions)).toEqual({
+      type: ActionType.LOAD_QUESTIONS,
+      payload: questions,
+    });
+  });
+});
+
+describe(`Operation`, () => {
+  it(`should make a correct API call to "/questions"`, () => {
+    const api = createApi(() => {});
+    const MockApi = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const questionsLoader = Operation.loadQuestions();
+
+    MockApi.onGet(`/questions`)
+    .reply(200, [{fake: true}]);
+
+    return questionsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledWith({
+          type: ActionType.LOAD_QUESTIONS,
+          payload: [{fake: true}],
+        });
+      });
   });
 });
