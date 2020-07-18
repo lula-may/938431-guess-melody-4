@@ -176,8 +176,7 @@ exports[`App Component should render ErrorScreen 1`] = `
   <p
     className="result__total result__total--fail"
   >
-    Упсс... У нас что-то сломалось. 
-    error message
+    Упсс... У нас что-то сломалось. Попробуйте зайти позднее.
   </p>
 </section>
 `;

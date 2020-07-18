@@ -5,7 +5,6 @@ const initialState = {
   questions: [],
   isLoading: false,
   hasErrors: false,
-  error: undefined,
 };
 
 const ActionType = {
@@ -23,17 +22,15 @@ const ActionCreator = {
 
   startLoading: () => ({
     type: ActionType.START_LOADING,
-    payload: null,
   }),
 
   endLoading: () => ({
     type: ActionType.END_LOADING,
-    payload: null,
   }),
 
-  setError: (error) => ({
+  setError: (hasErrors) => ({
     type: ActionType.SET_ERROR,
-    payload: error.message,
+    payload: hasErrors,
   })
 
 };
@@ -41,6 +38,7 @@ const ActionCreator = {
 const Operation = {
   loadQuestions: () => (dispatch, getState, api) => {
     dispatch(ActionCreator.startLoading());
+    dispatch(ActionCreator.setError(false));
     return api.get(`/questions`)
     .then((response) => {
       dispatch(ActionCreator.loadQuestions(adapter(response.data)));
@@ -48,7 +46,8 @@ const Operation = {
     })
     .catch((err) => {
       dispatch(ActionCreator.endLoading());
-      dispatch(ActionCreator.setError(err));
+      dispatch(ActionCreator.setError(true));
+      return err;
     });
   },
 };
@@ -71,8 +70,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.SET_ERROR:
       return extend(state, {
-        hasErrors: true,
-        error: action.payload,
+        hasErrors: action.payload,
       });
   }
   return state;

@@ -16,7 +16,7 @@ import withUserAnswer from "../../hocs/with-user-answer/with-user-answer.jsx";
 import {ActionCreator} from "../../reducer/game/game.js";
 import {GameType} from "../../const";
 import {getMaxMistakes, getMistakes, getStep} from "../../reducer/game/selectors.js";
-import {getQuestions, getLoadingState, getErrorState, getError} from "../../reducer/data/selectors.js";
+import {getQuestions, getLoadingState, getErrorState} from "../../reducer/data/selectors.js";
 
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withActivePlayer(withUserAnswer(GenreQuestionScreen));
@@ -49,7 +49,6 @@ class App extends PureComponent {
 
   _renderGameScreen() {
     const {
-      error,
       hasErrors,
       isLoading,
       maxMistakes,
@@ -71,9 +70,7 @@ class App extends PureComponent {
 
     if (hasErrors) {
       return (
-        <ErrorScreen
-          errorMessage={error}
-        />
+        <ErrorScreen/>
       );
     }
 
@@ -142,7 +139,6 @@ class App extends PureComponent {
   }
 }
 const mapStateToProps = (state) => ({
-  error: getError(state),
   hasErrors: getErrorState(state),
   isLoading: getLoadingState(state),
   maxMistakes: getMaxMistakes(state),
@@ -165,7 +161,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 App.propTypes = {
-  error: PropTypes.string,
   hasErrors: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   maxMistakes: PropTypes.number.isRequired,
