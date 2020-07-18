@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen.jsx";
+import ErrorScreen from "../error-screen/error-screen.jsx";
 import GameOverScreen from "../game-over-screen/game-over-screen.jsx";
 import GameScreen from "../game-screen/game-screen.jsx";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
@@ -58,6 +59,13 @@ class App extends PureComponent {
     } = this.props;
 
     const question = questions[step];
+
+    if (!questions.length) {
+      return (
+        <ErrorScreen/>
+      );
+    }
+
     if (step === -1) {
       return (
         <WelcomeScreen

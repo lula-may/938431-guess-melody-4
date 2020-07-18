@@ -21,7 +21,8 @@ const Operation = {
     return api.get(`/questions`)
     .then((response) => {
       dispatch(ActionCreator.loadQuestions(adapter(response.data)));
-    });
+    })
+    .catch((err) => err);
   },
 };
 
