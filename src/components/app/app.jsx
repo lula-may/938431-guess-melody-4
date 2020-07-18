@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen.jsx";
+import ErrorScreen from "../error-screen/error-screen.jsx";
 import GameOverScreen from "../game-over-screen/game-over-screen.jsx";
 import GameScreen from "../game-screen/game-screen.jsx";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
@@ -12,8 +13,10 @@ import WinScreen from "../win-screen/win-screen.jsx";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player.jsx";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer.jsx";
 
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/game/game.js";
 import {GameType} from "../../const";
+import {getMaxMistakes, getMistakes, getStep} from "../../reducer/game/selectors.js";
+import {getQuestions, getLoadingState, getErrorState} from "../../reducer/data/selectors.js";
 
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapped = withActivePlayer(withUserAnswer(GenreQuestionScreen));
@@ -46,6 +49,8 @@ class App extends PureComponent {
 
   _renderGameScreen() {
     const {
+      hasErrors,
+      isLoading,
       maxMistakes,
       mistakes,
       onAnswer,
@@ -56,6 +61,19 @@ class App extends PureComponent {
     } = this.props;
 
     const question = questions[step];
+
+    if (isLoading) {
+      return (
+        <div>Loading...</div>
+      );
+    }
+
+    if (hasErrors) {
+      return (
+        <ErrorScreen/>
+      );
+    }
+
     if (step === -1) {
       return (
         <WelcomeScreen
@@ -74,11 +92,12 @@ class App extends PureComponent {
     }
 
     if (step >= questions.length) {
+      const correctAnswersCount = questions.length - mistakes;
       return (
         <WinScreen
+          correctAnswersCount={correctAnswersCount}
           mistakesCount={mistakes}
           onReplayButtonClick={resetGame}
-          questionsCount={questions.length}
         />
       );
     }
@@ -120,10 +139,12 @@ class App extends PureComponent {
   }
 }
 const mapStateToProps = (state) => ({
-  maxMistakes: state.maxMistakes,
-  mistakes: state.mistakes,
-  questions: state.questions,
-  step: state.step,
+  hasErrors: getErrorState(state),
+  isLoading: getLoadingState(state),
+  maxMistakes: getMaxMistakes(state),
+  mistakes: getMistakes(state),
+  questions: getQuestions(state),
+  step: getStep(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -140,6 +161,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 App.propTypes = {
+  hasErrors: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   maxMistakes: PropTypes.number.isRequired,
   mistakes: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,

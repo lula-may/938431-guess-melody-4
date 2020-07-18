@@ -42,6 +42,9 @@ const withUserAnswer = (Component) => {
       const {onAnswer, question} = this.props;
       const userAnswers = this.state.answers;
       onAnswer(question, userAnswers);
+      this.setState({
+        answers: [false, false, false, false]
+      });
     }
   }
 

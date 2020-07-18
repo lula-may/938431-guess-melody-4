@@ -45,15 +45,17 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   _handleFormSubmit(evt) {
-    const {onAnswer} = this.props;
+    const {onAnswer, onQuestionChange} = this.props;
     evt.preventDefault();
     onAnswer();
+    onQuestionChange();
   }
 }
 
 GenreQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  onQuestionChange: PropTypes.func.isRequired,
   question: PropTypes.shape(genreQuestionShape).isRequired,
   renderPlayer: PropTypes.func.isRequired,
   userAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired

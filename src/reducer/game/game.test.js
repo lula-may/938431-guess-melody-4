@@ -1,5 +1,5 @@
-import {reducer, ActionCreator, ActionType} from "./reducer.js";
-import questions from "./mocks/questions.js";
+import {reducer, ActionCreator, ActionType} from "./game.js";
+import {questions} from "../../test-mocks/test-questions.js";
 
 const AVATAR_URL = `https://api.adorable.io/avatars`;
 
@@ -8,7 +8,6 @@ describe(`Reducer`, () => {
     expect(reducer(undefined, {})).toEqual({
       maxMistakes: 3,
       mistakes: 0,
-      questions,
       step: -1
     });
   });
@@ -17,7 +16,6 @@ describe(`Reducer`, () => {
     expect(reducer({
       mistakes: 0,
       step: -1,
-      questions,
     }, {
       type: ActionType.INCREMENT_STEP,
       payload: 1,
@@ -25,20 +23,17 @@ describe(`Reducer`, () => {
     )).toEqual({
       mistakes: 0,
       step: 0,
-      questions,
     });
 
     expect(reducer({
       mistakes: 1,
       step: 1,
-      questions,
     }, {
       type: ActionType.INCREMENT_STEP,
       payload: 0,
     })).toEqual({
       mistakes: 1,
       step: 1,
-      questions,
     });
   });
 
@@ -70,15 +65,13 @@ describe(`Reducer`, () => {
     expect(reducer({
       maxMistakes: 3,
       mistakes: 1,
-      questions,
-      step: questions.length,
+      step: 5,
     }, {
       type: ActionType.RESET,
       payload: null,
     })).toEqual({
       maxMistakes: 3,
       mistakes: 0,
-      questions,
       step: 0,
     });
   });
@@ -96,7 +89,7 @@ describe(`ActionCreator`, () => {
     const question = questions[0];
 
     const correctAnswer = {
-      artist: `Dire Straits`,
+      artist: `Lady Gaga`,
       avatar: `${AVATAR_URL}/2`,
       id: `artist1`
     };
