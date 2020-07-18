@@ -149,6 +149,39 @@ exports[`App Component should render ArtistQuestionScreen 1`] = `
 </section>
 `;
 
+exports[`App Component should render ErrorScreen 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    Ошибка загрузки данных.
+  </h2>
+  <p
+    className="result__total result__total--fail"
+  >
+    Упсс... У нас что-то сломалось. 
+    error message
+  </p>
+</section>
+`;
+
 exports[`App Component should render GameOverScreen 1`] = `
 <section
   className="result"

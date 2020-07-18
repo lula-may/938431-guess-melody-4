@@ -13,11 +13,19 @@ describe(`App Component`, () => {
     const store = mockStore({
       [NameSpace.GAME]: {
         mistakes: 0,
-      }});
+      },
+      [NameSpace.DATA]: {
+        error: undefined,
+        isLoading: false,
+        hasErrors: false
+      },
+    });
 
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            hasErrors={false}
+            isLoading={false}
             maxMistakes={3}
             mistakes={0}
             questions={questions}
@@ -40,6 +48,8 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            hasErrors={false}
+            isLoading={false}
             maxMistakes={3}
             mistakes={0}
             questions={questions}
@@ -65,6 +75,8 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            hasErrors={false}
+            isLoading={false}
             maxMistakes={3}
             mistakes={0}
             questions={questions}
@@ -90,6 +102,8 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            hasErrors={false}
+            isLoading={false}
             maxMistakes={3}
             mistakes={3}
             questions={questions}
@@ -115,6 +129,36 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            hasErrors={false}
+            isLoading={false}
+            maxMistakes={3}
+            mistakes={2}
+            questions={questions}
+            onAnswer={() => {}}
+            onWelcomeButtonClick={() => {}}
+            resetGame={() => {}}
+            step={3}
+          />
+        </Provider>,
+        {createNodeMock: () => {
+          return {};
+        }}
+    )
+    .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`should render ErrorScreen`, () => {
+    const store = mockStore({
+      [NameSpace.DATA]: {
+        error: `error message`,
+      }});
+    const tree = rerender.create(
+        <Provider store={store}>
+          <App
+            error={`error message`}
+            hasErrors={true}
+            isLoading={false}
             maxMistakes={3}
             mistakes={2}
             questions={questions}
