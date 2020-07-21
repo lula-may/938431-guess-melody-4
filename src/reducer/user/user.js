@@ -28,9 +28,7 @@ const Operation = {
     .then(() => {
       dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
     })
-    .catch((err) => {
-      throw err;
-    });
+    .catch((err) => err);
   },
 
   login: (authData) => (dispatch, getState, api) => {

@@ -26,7 +26,7 @@ class AuthorizationScreen extends PureComponent {
           </p>
           <p className="login__field">
             <label className="login__label" htmlFor="password">Пароль</label>
-            <input className="login__input" type="text" name="password" id="password"
+            <input className="login__input" type="password" name="password" id="password"
               ref={this.passwordRef}
             />
             <span className="login__error">Неверный пароль</span>
@@ -42,7 +42,7 @@ class AuthorizationScreen extends PureComponent {
     const {onSubmit} = this.props;
     evt.preventDefault();
     onSubmit({
-      login: this.loginRef.current.value,
+      email: this.loginRef.current.value,
       password: this.passwordRef.current.value,
     });
   }
