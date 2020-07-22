@@ -191,7 +191,8 @@ exports[`App Component should render AuthScreen 1`] = `
         className="login__input"
         id="name"
         name="name"
-        type="text"
+        required={true}
+        type="email"
       />
     </p>
     <p
@@ -207,6 +208,7 @@ exports[`App Component should render AuthScreen 1`] = `
         className="login__input"
         id="password"
         name="password"
+        required={true}
         type="password"
       />
       <span

@@ -20,14 +20,14 @@ class AuthorizationScreen extends PureComponent {
         <form className="login__form" action="" onSubmit={this.handleSubmit}>
           <p className="login__field">
             <label className="login__label" htmlFor="name">Логин</label>
-            <input className="login__input" type="text" name="name" id="name"
-              ref={this.loginRef}
+            <input className="login__input" type="email" name="name" id="name"
+              ref={this.loginRef} required
             />
           </p>
           <p className="login__field">
             <label className="login__label" htmlFor="password">Пароль</label>
             <input className="login__input" type="password" name="password" id="password"
-              ref={this.passwordRef}
+              ref={this.passwordRef} required
             />
             <span className="login__error">Неверный пароль</span>
           </p>
