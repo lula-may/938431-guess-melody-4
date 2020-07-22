@@ -58,7 +58,7 @@ exports[`AuthScreen should render correctly AuthScreen Component 1`] = `
         className="login__input"
         id="password"
         name="password"
-        type="text"
+        type="password"
       />
       <span
         className="login__error"

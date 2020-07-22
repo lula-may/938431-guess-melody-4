@@ -188,4 +188,33 @@ describe(`App Component`, () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it(`should render AuthScreen`, () => {
+    const store = mockStore({
+      [NameSpace.GAME]: {
+        mistakes: 2,
+      }});
+    const tree = rerender.create(
+        <Provider store={store}>
+          <App
+            authorizationStatus={`NO_AUTH`}
+            hasErrors={false}
+            isLoading={false}
+            login={() => {}}
+            maxMistakes={3}
+            mistakes={2}
+            questions={questions}
+            onAnswer={() => {}}
+            onWelcomeButtonClick={() => {}}
+            resetGame={() => {}}
+            step={3}
+          />
+        </Provider>,
+        {createNodeMock: () => {
+          return {};
+        }}
+    )
+    .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
 });
