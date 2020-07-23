@@ -24,8 +24,10 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            authorizationStatus={`NO_AUTH`}
             hasErrors={false}
             isLoading={false}
+            login={() => {}}
             maxMistakes={3}
             mistakes={0}
             questions={questions}
@@ -48,8 +50,10 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            authorizationStatus={`NO_AUTH`}
             hasErrors={false}
             isLoading={false}
+            login={() => {}}
             maxMistakes={3}
             mistakes={0}
             questions={questions}
@@ -75,8 +79,10 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            authorizationStatus={`NO_AUTH`}
             hasErrors={false}
             isLoading={false}
+            login={() => {}}
             maxMistakes={3}
             mistakes={0}
             questions={questions}
@@ -102,8 +108,10 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            authorizationStatus={`NO_AUTH`}
             hasErrors={false}
             isLoading={false}
+            login={() => {}}
             maxMistakes={3}
             mistakes={3}
             questions={questions}
@@ -129,8 +137,10 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            authorizationStatus={`AUTH`}
             hasErrors={false}
             isLoading={false}
+            login={() => {}}
             maxMistakes={3}
             mistakes={2}
             questions={questions}
@@ -156,9 +166,40 @@ describe(`App Component`, () => {
     const tree = rerender.create(
         <Provider store={store}>
           <App
+            authorizationStatus={`NO_AUTH`}
             error={`error message`}
             hasErrors={true}
             isLoading={false}
+            login={() => {}}
+            maxMistakes={3}
+            mistakes={2}
+            questions={questions}
+            onAnswer={() => {}}
+            onWelcomeButtonClick={() => {}}
+            resetGame={() => {}}
+            step={3}
+          />
+        </Provider>,
+        {createNodeMock: () => {
+          return {};
+        }}
+    )
+    .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`should render AuthScreen`, () => {
+    const store = mockStore({
+      [NameSpace.GAME]: {
+        mistakes: 2,
+      }});
+    const tree = rerender.create(
+        <Provider store={store}>
+          <App
+            authorizationStatus={`NO_AUTH`}
+            hasErrors={false}
+            isLoading={false}
+            login={() => {}}
             maxMistakes={3}
             mistakes={2}
             questions={questions}
