@@ -9,6 +9,7 @@ import ErrorScreen from "../error-screen/error-screen.jsx";
 import GameOverScreen from "../game-over-screen/game-over-screen.jsx";
 import GameScreen from "../game-screen/game-screen.jsx";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen.jsx";
+import PrivateRoute from "../private-route/private-route.jsx";
 import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
 import WinScreen from "../win-screen/win-screen.jsx";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player.jsx";
@@ -57,13 +58,19 @@ class App extends PureComponent {
             />
           </Route>
 
-          <Route exact path={AppRoute.RESULT}>
-            <WinScreen
-              correctAnswersCount={correctAnswersCount}
-              mistakesCount={mistakes}
-              onReplayButtonClick={resetGame}
-            />
-          </Route>
+          <PrivateRoute
+            exact
+            path={AppRoute.RESULT}
+            render={() => {
+              return (
+                <WinScreen
+                  correctAnswersCount={correctAnswersCount}
+                  mistakesCount={mistakes}
+                  onReplayButtonClick={resetGame}
+                />
+              );
+            }}
+          />
         </Switch>
       </Router>
     );
