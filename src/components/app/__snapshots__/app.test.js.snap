@@ -9,7 +9,8 @@ exports[`App Component should render ArtistQuestionScreen 1`] = `
   >
     <a
       className="game__back"
-      href="#"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="visually-hidden"
@@ -290,13 +291,14 @@ exports[`App Component should render GameOverScreen 1`] = `
   >
     У вас закончились все попытки. Ничего, повезёт в следующий раз!
   </p>
-  <button
+  <a
     className="replay"
+    href="/"
     onClick={[Function]}
     type="button"
   >
     Попробовать ещё раз
-  </button>
+  </a>
 </section>
 `;
 
@@ -309,7 +311,8 @@ exports[`App Component should render GenreQuestionScreen 1`] = `
   >
     <a
       className="game__back"
-      href="#"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="visually-hidden"
@@ -562,10 +565,10 @@ exports[`App Component should render WelcomeScreen 1`] = `
 
 exports[`App Component should render WinScreen 1`] = `
 <section
-  className="result"
+  className="login"
 >
   <div
-    className="result__logo"
+    className="login__logo"
   >
     <img
       alt="Угадай мелодию"
@@ -575,19 +578,66 @@ exports[`App Component should render WinScreen 1`] = `
     />
   </div>
   <h2
-    className="result__title"
+    className="login__title"
   >
     Вы настоящий меломан!
   </h2>
   <p
-    className="result__total"
+    className="login__text"
   >
-    Вы ответили правильно на 
-    0
-     вопросов и совершили 
-    2
-     ошибки
+    Хотите узнать свой результат? Представтесь!
   </p>
+  <form
+    action=""
+    className="login__form"
+    onSubmit={[Function]}
+  >
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="name"
+      >
+        Логин
+      </label>
+      <input
+        className="login__input"
+        id="name"
+        name="name"
+        required={true}
+        type="email"
+      />
+    </p>
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="password"
+      >
+        Пароль
+      </label>
+      <input
+        className="login__input"
+        id="password"
+        name="password"
+        required={true}
+        type="password"
+      />
+      <span
+        className="login__error"
+      >
+        Неверный пароль
+      </span>
+    </p>
+    <button
+      className="login__button button"
+      type="submit"
+    >
+      Войти
+    </button>
+  </form>
   <button
     className="replay"
     onClick={[Function]}

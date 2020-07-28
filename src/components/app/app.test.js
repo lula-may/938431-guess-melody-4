@@ -19,6 +19,9 @@ describe(`App Component`, () => {
         isLoading: false,
         hasErrors: false
       },
+      [NameSpace.USER]: {
+        authorizationStatus: `NO_AUTH`,
+      }
     });
 
     const tree = rerender.create(
@@ -133,7 +136,12 @@ describe(`App Component`, () => {
     const store = mockStore({
       [NameSpace.GAME]: {
         mistakes: 2,
-      }});
+        step: questions.length,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: `AUTH`,
+      },
+    });
     const tree = rerender.create(
         <Provider store={store}>
           <App
@@ -147,7 +155,7 @@ describe(`App Component`, () => {
             onAnswer={() => {}}
             onWelcomeButtonClick={() => {}}
             resetGame={() => {}}
-            step={3}
+            step={questions.length}
           />
         </Provider>,
         {createNodeMock: () => {
