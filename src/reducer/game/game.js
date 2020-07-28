@@ -8,6 +8,7 @@ const initialState = {
 };
 
 const ActionType = {
+  GO_TO_WELCOME: `GO_TO_WELCOME`,
   INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
   INCREMENT_STEP: `INCREMENT_STEP`,
   RESET: `RESET`,
@@ -24,6 +25,10 @@ const isGenreAnswerCorrect = (question, userAnswer) => {
 };
 
 const ActionCreator = {
+  goToWelcome: () => ({
+    type: ActionType.GO_TO_WELCOME,
+  }),
+
   incrementStep: () => ({
     type: ActionType.INCREMENT_STEP,
     payload: 1
@@ -55,6 +60,8 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.GO_TO_WELCOME:
+      return extend(initialState);
     case ActionType.INCREMENT_MISTAKES:
       const mistakes = state.mistakes + action.payload;
       return extend(state, {mistakes});
