@@ -3,4 +3,12 @@ const GameType = {
   GENRE: `genre`
 };
 
-export {GameType};
+const AppRoute = {
+  ERROR: `/error`,
+  LOGIN: `/login`,
+  LOSE: `/lose`,
+  RESULT: `/result`,
+  ROOT: `/`
+};
+
+export {AppRoute, GameType};

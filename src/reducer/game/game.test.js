@@ -12,6 +12,20 @@ describe(`Reducer`, () => {
     });
   });
 
+  it(`should return initialState when GO_TO_WELCOME action passed`, () => {
+    expect(reducer({
+      maxMistakes: 3,
+      mistakes: 2,
+      step: 5,
+    }, {
+      type: ActionType.GO_TO_WELCOME,
+    })).toEqual({
+      maxMistakes: 3,
+      mistakes: 0,
+      step: -1,
+    });
+  });
+
   it(`should increment current step by passed value`, () => {
     expect(reducer({
       mistakes: 0,
@@ -78,6 +92,13 @@ describe(`Reducer`, () => {
 });
 
 describe(`ActionCreator`, () => {
+  it(`should return correct action for goToWelcome`, () => {
+    expect(ActionCreator.goToWelcome()).toEqual({
+      type: ActionType.GO_TO_WELCOME,
+    });
+  });
+
+
   it(`should return correct action for step increment`, () => {
     expect(ActionCreator.incrementStep()).toEqual({
       type: ActionType.INCREMENT_STEP,
